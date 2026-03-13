@@ -40,12 +40,6 @@ SQL_Warehouse_Project_SCD2/
 4. Proceed to stage loads using `scripts/stage/ddl_stage_scd2.sql` and `scripts/stage/proc_load_stage_scd2.sql`.
 5. Use the `tests` scripts to perform data quality checks.
 
-## 🧪 Testing and Quality
-
-- `tests/data_quality_check_stage.sql` – ensures stage-level integrity.
-- `tests/data_quality_check_report.sql` – verifies reporting layer.
-
-
 ## 📄 Reporting
 
 - Use the scripts in `scripts/report/` for DDL and procedures to support reporting on the SCD2 data.

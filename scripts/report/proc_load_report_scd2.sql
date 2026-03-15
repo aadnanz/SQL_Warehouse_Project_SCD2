@@ -86,7 +86,7 @@ INSERT INTO report.dim_customers
 (customer_id, customer_number, first_name, last_name, country, marital_status, gender, birthdate, create_date, dwh_create_date, is_current)
 SELECT
     cr.cst_id, cr.cst_key, cr.cst_firstname, cr.cst_lastname, cr.cntry, cr.cst_marital_status, cr.gender, cr.bdate,
-    s.cst_create_date, GETDATE(), 'A'
+    cr.cst_create_date, GETDATE(), 'A'
 FROM #changed_records cr;
 
 /* STEP 5: Insert completely new customers */

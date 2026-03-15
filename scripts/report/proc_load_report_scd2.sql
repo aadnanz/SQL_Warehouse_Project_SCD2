@@ -83,19 +83,16 @@ WHERE tgt.is_current = 'A';
 
 /* STEP 4: Insert new version for changed customers */
 INSERT INTO report.dim_customers
-    (customer_id, customer_number, first_name, last_name, country, marital_status,
-    gender, birthdate, create_date, is_current)
+(customer_id, customer_number, first_name, last_name, country, marital_status, gender, birthdate, create_date, dwh_create_date, is_current)
 SELECT
-    s.cst_id, s.cst_key, s.cst_firstname, s.cst_lastname, s.cntry, s.cst_marital_status,
-    s.gender, s.bdate, s.cst_create_date, GETDATE(), 'A'
-FROM #source_data s
-JOIN #changed_records cr
-     ON s.cst_id = cr.cst_id;
+    cr.cst_id, cr.cst_key, cr.cst_firstname, cr.cst_lastname, cr.cntry, cr.cst_marital_status, cr.gender, cr.bdate,
+    s.cst_create_date, GETDATE(), 'A'
+FROM #changed_records cr;
 
 /* STEP 5: Insert completely new customers */
 INSERT INTO report.dim_customers
     (customer_id, customer_number, first_name, last_name, country, marital_status, gender,
-    birthdate, create_date, is_current)
+    birthdate, create_date,dwh_create_date, is_current)
 SELECT
     s.cst_id, s.cst_key, s.cst_firstname, s.cst_lastname, s.cntry, s.cst_marital_status, s.gender,
     s.bdate, s.cst_create_date, GETDATE(), 'A'
